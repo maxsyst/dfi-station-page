@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高端暗场晶圆缺陷检测系统工站 | 产品介绍</title>
+<meta name="description" content="面向半导体制造的暗场晶圆缺陷检测系统工站，4~12英寸全尺寸检测，≤80nm检测灵敏度，≥30片/小时检测速度。全矢量图文介绍。">
+<style>
+:root{
+  --bg:#070b14;--bg2:#0b1220;--panel:#0f1828;--panel2:#121e33;
+  --line:rgba(120,160,220,.14);--line2:rgba(120,160,220,.28);
+  --txt:#e8eef8;--sub:#9aabc4;--muted:#6b7d99;
+  --acc:#38bdf8;--acc2:#22d3ee;--acc3:#818cf8;--gold:#fbbf24;--red:#f87171;
+  --ok:#34d399;--max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.3;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);}
+.bg-glow{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(90px);opacity:.2}
+.bg-glow.a{width:520px;height:520px;top:-160px;left:-120px;background:#1e40af}
+.bg-glow.b{width:460px;height:460px;top:280px;right:-160px;background:#0e7490}
+main,header,footer{position:relative;z-index:1}
+
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,20,.72);border-bottom:1px solid var(--line)}
+.nav{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700}
+.brand .mk{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc3));display:grid;place-items:center;box-shadow:0 0 18px rgba(56,189,248,.3)}
+.brand .mk svg{width:17px;height:17px}
+.brand b{font-size:15px}
+.brand small{display:block;font-size:10px;color:var(--muted);font-weight:500;letter-spacing:1.2px}
+.navlinks{display:flex;gap:26px;font-size:13px;color:var(--sub)}
+.navlinks a:hover{color:var(--acc)}
+@media(max-width:820px){.navlinks{display:none}}
+
+.hero{padding:70px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--acc2);border:1px solid var(--line2);padding:7px 14px;border-radius:100px;background:rgba(56,189,248,.06);letter-spacing:.5px}
+.tag .dot{width:6px;height:6px;border-radius:50%;background:var(--acc2);box-shadow:0 0 10px var(--acc2)}
+.hero h1{font-size:clamp(32px,4.6vw,56px);line-height:1.16;margin:20px 0 16px;font-weight:800;letter-spacing:-1px}
+.hero h1 .grad{background:linear-gradient(100deg,var(--acc),var(--acc2) 45%,var(--acc3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:clamp(14px,1.7vw,18px);color:var(--sub);max-width:560px}
+.hero .en{font-size:11px;color:var(--muted);letter-spacing:1.8px;text-transform:uppercase;margin-top:10px}
+.cta{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.btn{padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn.pri{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#04121c;box-shadow:0 8px 26px rgba(56,189,248,.25)}
+.btn.pri:hover{transform:translateY(-2px)}
+.btn.gho{border:1px solid var(--line2);color:var(--txt)}
+.btn.gho:hover{border-color:var(--acc);color:var(--acc)}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.metric{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.metric::after{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--acc),transparent);opacity:.7}
+.metric .ring{flex:none}
+.metric .v{font-size:clamp(22px,2.8vw,30px);font-weight:800;letter-spacing:-.8px;line-height:1}
+.metric .v span{font-size:13px;color:var(--acc2);font-weight:600}
+.metric .k{font-size:12px;color:var(--sub);margin-top:6px}
+@media(max-width:820px){.metrics{grid-template-columns:repeat(2,1fr)}}
+
+section{padding:64px 0}
+.sec-h{margin-bottom:30px;max-width:780px}
+.eyebrow{font-size:12px;color:var(--acc);letter-spacing:2.5px;font-weight:600;text-transform:uppercase}
+.sec-h h2{font-size:clamp(24px,3.2vw,38px);margin:12px 0 12px;letter-spacing:-.6px}
+.sec-h p{color:var(--sub);font-size:15px}
+
+.vector-note{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--acc2);border:1px dashed var(--line2);padding:5px 12px;border-radius:8px;margin-top:14px;background:rgba(34,211,238,.04)}
+
+/* principle compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px;overflow:hidden}
+.panel h3{font-size:16px;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.panel h3 .pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.5px}
+.pill.bf{background:rgba(251,191,36,.14);color:var(--gold);border:1px solid rgba(251,191,36,.3)}
+.pill.df{background:rgba(56,189,248,.14);color:var(--acc);border:1px solid rgba(56,189,248,.3)}
+.panel p{font-size:13px;color:var(--sub);margin-top:6px}
+@media(max-width:820px){.compare{grid-template-columns:1fr}}
+
+/* feature cards */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.25s}
+.fcard:hover{border-color:var(--line2);transform:translateY(-3px)}
+.fcard .ico{width:52px;height:52px;margin-bottom:14px}
+.fcard h4{font-size:15px;margin-bottom:6px}
+.fcard p{font-size:13px;color:var(--sub)}
+@media(max-width:820px){.feat{grid-template-columns:repeat(2,1fr)}}
+
+/* wafer + defects */
+.wafer-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:center}
+@media(max-width:820px){.wafer-layout{grid-template-columns:1fr}}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-top:16px}
+.legend div{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--sub)}
+.legend i{width:12px;height:12px;border-radius:50%;flex:none}
+
+/* system flow */
+.flow-wrap{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:26px}
+.flow-band{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--acc2);letter-spacing:1px;border-bottom:1px solid var(--line2);padding-bottom:8px;margin-bottom:18px}
+
+/* apps */
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.app{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center;transition:.25s}
+.app:hover{border-color:var(--line2);transform:translateY(-3px)}
+.app .ico{height:70px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.app h4{font-size:14px}
+.app p{font-size:12px;color:var(--muted);margin-top:4px}
+@media(max-width:820px){.apps{grid-template-columns:repeat(2,1fr)}}
+
+/* specs */
+.spec-wrap{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+table th,table td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table th{color:var(--acc2);font-weight:600;width:45%;background:rgba(56,189,248,.03)}
+table td{color:var(--txt)}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;font-size:13px;color:var(--sub)}
+.note h4{color:var(--txt);font-size:15px;margin-bottom:10px}
+.note .warn{color:var(--gold)}
+.note li{margin:8px 0 8px 18px}
+@media(max-width:820px){.spec-wrap{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:12px;margin-top:30px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.reveal.vis{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow a"></div>
+<div class="bg-glow b"></div>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="#04121c" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+      <div><b>暗场晶圆缺陷检测工站</b><small>DARK-FIELD WAFER INSPECTION</small></div>
+    </div>
+    <nav class="navlinks">
+      <a href="#principle">检测原理</a>
+      <a href="#wafer">缺陷覆盖</a>
+      <a href="#system">系统构成</a>
+      <a href="#specs">技术参数</a>
+      <a href="#about">关于说明</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="tag"><span class="dot"></span>半导体前道量检测 · 高端装备</span>
+        <h1>看清每一处<span class="grad">纳米级缺陷</span><br>守护晶圆良率</h1>
+        <p class="lead">面向半导体制造的暗场晶圆缺陷检测系统工站，以大角度斜入射散射光成像，对纳米级颗粒、微划痕与形貌异常进行高速全片扫描与智能分类。</p>
+        <div class="en">High-End Dark-Field Wafer Defect Inspection System Workstation</div>
+        <div class="cta">
+          <a href="#principle" class="btn pri">了解检测原理
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#specs" class="btn gho">查看技术参数</a>
+        </div>
+        <span class="vector-note">本页所有图形均为 HTML + SVG 矢量绘制，非位图图片</span>
+      </div>
+
+      <!-- VECTOR WORKSTATION ILLUSTRATION -->
+      <div class="hero-art">
+        <svg viewBox="0 0 640 470" width="100%" role="img" aria-label="暗场晶圆缺陷检测工站矢量示意图">
+          <defs>
+            <linearGradient id="cab" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1b2c44"/><stop offset="0.5" stop-color="#142033"/><stop offset="1" stop-color="#0d1727"/>
+            </linearGradient>
+            <linearGradient id="cabTop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#26405f"/><stop offset="1" stop-color="#1a2c45"/>
+            </linearGradient>
+            <linearGradient id="cabSide" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0e1a2b"/><stop offset="1" stop-color="#0a1220"/>
+            </linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0b2033"/><stop offset="1" stop-color="#06101c"/>
+            </linearGradient>
+            <radialGradient id="waferG" cx="40%" cy="35%" r="70%">
+              <stop offset="0" stop-color="#5eead4"/><stop offset="0.45" stop-color="#22d3ee"/><stop offset="1" stop-color="#0e7490"/>
+            </radialGradient>
+            <radialGradient id="glowC" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0d2a3d"/><stop offset="1" stop-color="#071a28"/>
+            </linearGradient>
+            <filter id="bgl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+
+          <!-- floor grid -->
+          <g stroke="rgba(120,160,220,.13)" stroke-width="1">
+            <path d="M40 400H620M60 420H600M90 440H570M120 460H540"/>
+            <path d="M180 392 L100 465M260 392 L220 465M340 392 L340 465M420 392 L460 465M500 392 L580 465"/>
+          </g>
+          <ellipse cx="330" cy="412" rx="230" ry="26" fill="#000" opacity=".45" filter="url(#bgl)"/>
+
+          <!-- main cabinet 2.5D -->
+          <polygon points="180,92 232,58 532,58 480,92" fill="url(#cabTop)" stroke="#33557a" stroke-width="1.2"/>
+          <polygon points="480,92 532,58 532,358 480,392" fill="url(#cabSide)" stroke="#33557a" stroke-width="1.2"/>
+          <rect x="180" y="92" width="300" height="300" rx="8" fill="url(#cab)" stroke="#33557a" stroke-width="1.4"/>
+
+          <!-- top brand strip -->
+          <rect x="180" y="92" width="300" height="20" rx="8" fill="#0a1422" opacity=".9"/>
+          <circle cx="196" cy="102" r="3.2" fill="#34d399"/>
+          <text x="208" y="106" fill="#7d97b8" font-size="9" letter-spacing="1.6">DARK-FIELD INSPECTION SYSTEM</text>
+
+          <!-- observation window -->
+          <rect x="200" y="126" width="258" height="168" rx="6" fill="url(#glass)" stroke="#2b4a6b" stroke-width="1.4"/>
+          <!-- inner wafer stage -->
+          <ellipse cx="330" cy="258" rx="104" ry="30" fill="#0c1c2e" stroke="#28507a" stroke-width="1.2"/>
+          <ellipse cx="330" cy="250" rx="92" ry="26" fill="url(#waferG)" opacity=".92"/>
+          <ellipse cx="330" cy="250" rx="92" ry="26" fill="none" stroke="#a5f3fc" stroke-width="1" opacity=".7"/>
+          <!-- wafer notch -->
+          <path d="M330 276 l6 -7 l-12 0 z" fill="#0c1c2e"/>
+          <!-- wafer grid -->
+          <g stroke="#083344" stroke-width=".7" opacity=".55">
+            <path d="M270 250h120M292 238h76M292 262h76M310 230v40M350 230v40"/>
+          </g>
+          <!-- defect glints -->
+          <circle cx="300" cy="244" r="2.4" fill="#fef08a"/><circle cx="356" cy="256" r="2" fill="#fca5a5"/>
+          <circle cx="318" cy="260" r="1.6" fill="#fef08a"/>
+          <circle cx="300" cy="244" r="11" fill="url(#glowC)"/>
+          <!-- optical head -->
+          <rect x="318" y="132" width="24" height="52" rx="3" fill="#1c3350" stroke="#3a6187"/>
+          <rect x="312" y="180" width="36" height="12" rx="3" fill="#244a6b" stroke="#4a7ba3"/>
+          <ellipse cx="330" cy="194" rx="12" ry="5" fill="#67e8f9" opacity=".85"/>
+          <!-- optical axis -->
+          <path d="M330 196 L330 244" stroke="#67e8f9" stroke-width="1" stroke-dasharray="4 3" opacity=".6"/>
+          <!-- light beam from head to wafer -->
+          <path d="M316 194 L296 246 M344 194 L364 250" stroke="#fbbf24" stroke-width="1.3" opacity=".85"/>
+          <text x="214" y="288" fill="#5e7da0" font-size="8.5">STAGE / WAFER</text>
+
+          <!-- control screen on cabinet -->
+          <rect x="360" y="310" width="98" height="62" rx="5" fill="url(#screen)" stroke="#2b4a6b"/>
+          <text x="368" y="324" fill="#67e8f9" font-size="8">SCAN STATUS</text>
+          <path d="M368 350 l10 -8 l10 5 l10 -12 l10 9 l10 -14 l10 10 l10 -6 l10 4" fill="none" stroke="#22d3ee" stroke-width="1.4"/>
+          <g fill="#34d399"><circle cx="368" cy="362" r="2"/><circle cx="378" cy="362" r="2"/></g>
+          <g fill="#fbbf24"><circle cx="388" cy="362" r="2"/></g>
+          <!-- buttons -->
+          <circle cx="208" cy="344" r="7" fill="#16324a" stroke="#3a6187"/><circle cx="208" cy="344" r="2.5" fill="#34d399"/>
+          <circle cx="230" cy="344" r="7" fill="#16324a" stroke="#3a6187"/><circle cx="230" cy="344" r="2.5" fill="#38bdf8"/>
+
+          <!-- EFEM module -->
+          <rect x="48" y="196" width="112" height="196" rx="7" fill="url(#cab)" stroke="#33557a" stroke-width="1.3"/>
+          <text x="60" y="216" fill="#7d97b8" font-size="9" letter-spacing="1.4">EFEM</text>
+          <!-- load port + FOUP -->
+          <rect x="60" y="228" width="88" height="54" rx="5" fill="#0c1a2b" stroke="#2b4a6b"/>
+          <g stroke="#3a6187" stroke-width="1" fill="none">
+            <ellipse cx="104" cy="246" rx="30" ry="8"/><ellipse cx="104" cy="258" rx="30" ry="8"/><ellipse cx="104" cy="270" rx="30" ry="8"/>
+          </g>
+          <g fill="#22d3ee" opacity=".6"><circle cx="104" cy="246" r="1.6"/><circle cx="104" cy="258" r="1.6"/><circle cx="104" cy="270" r="1.6"/></g>
+          <!-- robot arm -->
+          <path d="M104 300 L134 288 L150 300" fill="none" stroke="#4a7ba3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="104" cy="300" r="6" fill="#244a6b" stroke="#4a7ba3"/>
+          <rect x="60" y="330" width="88" height="46" rx="5" fill="#0c1a2b" stroke="#2b4a6b"/>
+          <g stroke="#24405c" stroke-width="1"><path d="M60 344h88M60 358h88M60 368h88"/></g>
+          <!-- transfer arrow -->
+          <path d="M162 262 C176 262 176 214 192 214" fill="none" stroke="#22d3ee" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <path d="M188 209 l6 5 l-6 5" fill="none" stroke="#22d3ee" stroke-width="1.6"/>
+
+          <!-- cabinet feet -->
+          <rect x="196" y="392" width="20" height="16" fill="#0a1220" stroke="#33557a"/>
+          <rect x="444" y="392" width="20" height="16" fill="#0a1220" stroke="#33557a"/>
+          <rect x="64" y="392" width="18" height="14" fill="#0a1220" stroke="#33557a"/>
+          <rect x="126" y="392" width="18" height="14" fill="#0a1220" stroke="#33557a"/>
+
+          <!-- callout labels -->
+          <g font-size="9.5" fill="#8aa8c8">
+            <path d="M486 150 L560 150 L560 138" fill="none" stroke="#3a6187" stroke-width="1"/>
+            <text x="498" y="147">光学检测单元</text>
+            <path d="M232 250 L566 250 L566 238" fill="none" stroke="#3a6187" stroke-width="1"/>
+            <text x="470" y="247">晶圆载台</text>
+            <path d="M104 196 L104 176 L40 176" fill="none" stroke="#3a6187" stroke-width="1"/>
+            <text x="42" y="171">EFEM 自动上下料</text>
+          </g>
+          <text x="330" y="452" text-anchor="middle" fill="#54708f" font-size="9.5" letter-spacing="1">概念示意图 · 非真实产品 · 非真实尺寸</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics">
+      <div class="metric">
+        <svg class="ring" width="58" height="58" viewBox="0 0 58 58">
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#1c2f47" stroke-width="5"/>
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-dasharray="108 145" transform="rotate(-90 29 29)"/>
+          <circle cx="29" cy="29" r="14" fill="#0c1a2b"/>
+          <text x="29" y="33" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="700">80</text>
+        </svg>
+        <div><div class="v">≤80<span>nm</span></div><div class="k">检测灵敏度</div></div>
+      </div>
+      <div class="metric">
+        <svg class="ring" width="58" height="58" viewBox="0 0 58 58">
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#1c2f47" stroke-width="5"/>
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round" stroke-dasharray="120 145" transform="rotate(-90 29 29)"/>
+          <circle cx="29" cy="29" r="14" fill="#0c1a2b"/>
+          <text x="29" y="33" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="700">30</text>
+        </svg>
+        <div><div class="v">≥30<span>片/时</span></div><div class="k">检测速度</div></div>
+      </div>
+      <div class="metric">
+        <svg class="ring" width="58" height="58" viewBox="0 0 58 58">
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#1c2f47" stroke-width="5"/>
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#818cf8" stroke-width="5" stroke-linecap="round" stroke-dasharray="96 145" transform="rotate(-90 29 29)"/>
+          <circle cx="29" cy="29" r="14" fill="#0c1a2b"/>
+          <text x="29" y="33" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="700">0.5</text>
+        </svg>
+        <div><div class="v">≤0.5<span>μm</span></div><div class="k">位置重复性</div></div>
+      </div>
+      <div class="metric">
+        <svg class="ring" width="58" height="58" viewBox="0 0 58 58">
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#1c2f47" stroke-width="5"/>
+          <circle cx="29" cy="29" r="23" fill="none" stroke="#34d399" stroke-width="5" stroke-linecap="round" stroke-dasharray="135 145" transform="rotate(-90 29 29)"/>
+          <circle cx="29" cy="29" r="14" fill="#0c1a2b"/>
+          <text x="29" y="33" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="700">97</text>
+        </svg>
+        <div><div class="v">≥97<span>%</span></div><div class="k">分类准确率</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE -->
+  <section id="principle">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Detection Principle</div>
+      <h2>明场看差异，暗场看散射</h2>
+      <p>暗场检测用光阑遮挡镜面反射光，让平整表面呈暗背景；颗粒、划痕与凸起等缺陷将光散射进收集光路，在暗背景中凸显为亮点，获得优异信噪比与高速扫描能力。</p>
+    </div>
+    <div class="compare">
+
+      <!-- BRIGHT FIELD SVG -->
+      <div class="panel reveal">
+        <h3><span class="pill bf">BRIGHT FIELD</span> 明场检测</h3>
+        <p>接收镜面反射光形成亮背景，通过反射率差异识别图形缺陷。</p>
+        <svg viewBox="0 0 520 300" width="100%" role="img" aria-label="明场检测光路示意图">
+          <defs>
+            <linearGradient id="bfBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#101c2e"/><stop offset="1" stop-color="#0a1422"/>
+            </linearGradient>
+            <marker id="arrGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#fbbf24"/></marker>
+            <marker id="arrSlate" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#94a3b8"/></marker>
+          </defs>
+          <rect x="1" y="1" width="518" height="298" rx="8" fill="url(#bfBg)" stroke="#233b57"/>
+          <!-- bright background band -->
+          <rect x="150" y="70" width="220" height="150" fill="#fbbf24" opacity=".05"/>
+          <!-- objective lens -->
+          <path d="M226 58 Q260 44 294 58 Q260 92 226 58 Z" fill="#24405c" stroke="#4a7ba3" stroke-width="1.4"/>
+          <text x="260" y="38" text-anchor="middle" fill="#7d97b8" font-size="10">物镜</text>
+          <!-- incident vertical rays -->
+          <g stroke="#fbbf24" stroke-width="1.6" marker-end="url(#arrGold)" opacity=".95">
+            <path d="M236 8 L246 56"/><path d="M260 8 L260 56"/><path d="M284 8 L274 56"/>
+          </g>
+          <!-- wafer surface -->
+          <rect x="70" y="226" width="380" height="10" rx="2" fill="#1e3a5f" stroke="#3a6187"/>
+          <rect x="70" y="236" width="380" height="42" fill="#122336"/>
+          <!-- surface pattern (bright-field sees bright background) -->
+          <g fill="#fbbf24" opacity=".55"><rect x="150" y="228" width="18" height="6"/><rect x="300" y="228" width="18" height="6"/><rect x="360" y="228" width="14" height="6"/></g>
+          <!-- defect: dark spot on bright bg -->
+          <circle cx="260" cy="226" r="5" fill="#0a1422" stroke="#f87171" stroke-width="1.2"/>
+          <text x="272" y="220" fill="#f87171" font-size="9.5">缺陷呈暗</text>
+          <!-- reflected rays back into objective -->
+          <g stroke="#94a3b8" stroke-width="1.6" marker-end="url(#arrSlate)" opacity=".9">
+            <path d="M250 226 L244 66"/><path d="M270 226 L276 66"/>
+          </g>
+          <!-- detector -->
+          <rect x="222" y="16" width="76" height="12" rx="3" fill="#1c3350" stroke="#3a6187"/>
+          <text x="260" y="13" text-anchor="middle" fill="#7d97b8" font-size="9">探测器</text>
+          <!-- labels -->
+          <g fill="#5e7da0" font-size="9.5">
+            <path d="M330 100 L400 100" stroke="#3a6187" fill="none"/><text x="404" y="104">亮背景</text>
+            <path d="M84 130 L150 130" stroke="#3a6187" fill="none"/><text x="46" y="134">垂直入射光</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- DARK FIELD SVG -->
+      <div class="panel reveal">
+        <h3><span class="pill df">DARK FIELD</span> 暗场检测</h3>
+        <p>斜入射光被光阑挡去镜面反射，只收缺陷散射光，暗背景中缺陷呈亮。</p>
+        <svg viewBox="0 0 520 300" width="100%" role="img" aria-label="暗场检测光路示意图">
+          <defs>
+            <linearGradient id="dfBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0c1a2a"/><stop offset="1" stop-color="#060e19"/>
+            </linearGradient>
+            <marker id="arrCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#22d3ee"/></marker>
+            <marker id="arrDim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#475569"/></marker>
+            <radialGradient id="scatterG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#22d3ee" stop-opacity=".7"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect x="1" y="1" width="518" height="298" rx="8" fill="url(#dfBg)" stroke="#234058"/>
+          <!-- dark background band -->
+          <rect x="150" y="70" width="220" height="150" fill="#0b1626"/>
+          <!-- objective + aperture -->
+          <path d="M232 58 Q260 44 288 58 Q260 84 232 58 Z" fill="#1c3a52" stroke="#3a7ba3" stroke-width="1.4"/>
+          <text x="260" y="36" text-anchor="middle" fill="#7d97b8" font-size="10">高NA物镜</text>
+          <!-- aperture stop blocking specular -->
+          <rect x="300" y="96" width="8" height="40" rx="2" fill="#475569" stroke="#94a3b8"/>
+          <text x="316" y="106" fill="#94a3b8" font-size="9">光阑</text>
+          <!-- oblique incident rays -->
+          <g stroke="#fbbf24" stroke-width="1.7" marker-end="url(#arrGold)" opacity=".95">
+            <path d="M120 40 L240 220"/><path d="M150 34 L262 220"/>
+          </g>
+          <!-- wafer -->
+          <rect x="70" y="226" width="380" height="10" rx="2" fill="#16304a" stroke="#2f5e86"/>
+          <rect x="70" y="236" width="380" height="42" fill="#0e1d2e"/>
+          <!-- particle -->
+          <path d="M252 226 l7 -12 l7 12 z" fill="#22d3ee"/>
+          <circle cx="259" cy="218" r="18" fill="url(#scatterG)"/>
+          <circle cx="259" cy="218" r="2.6" fill="#a5f3fc"/>
+          <!-- specular reflected ray blocked by aperture (dashed, ends at stop) -->
+          <path d="M262 226 L304 116" stroke="#475569" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrDim)"/>
+          <text x="330" y="150" fill="#64748b" font-size="9">镜面反射被遮挡</text>
+          <!-- scattered light collected into objective -->
+          <g stroke="#22d3ee" stroke-width="1.8" marker-end="url(#arrCyan)">
+            <path d="M259 218 L250 62"/><path d="M259 218 L268 62"/>
+          </g>
+          <!-- detector -->
+          <rect x="222" y="16" width="76" height="12" rx="3" fill="#13344a" stroke="#3a7ba3"/>
+          <text x="260" y="13" text-anchor="middle" fill="#7d97b8" font-size="9">探测器</text>
+          <!-- labels -->
+          <g fill="#5e7da0" font-size="9.5">
+            <path d="M84 90 L150 90" stroke="#3a6187" fill="none"/><text x="40" y="94">斜入射照明</text>
+            <path d="M300 214 L360 214" stroke="#2f5e86" fill="none"/><text x="364" y="218">散射亮点</text>
+          </g>
+          <text x="260" y="284" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="600">暗背景 · 亮缺陷 · 高信噪比</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="feat">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Core Capabilities</div>
+      <h2>六大核心能力</h2>
+      <p>全尺寸兼容、高灵敏探测、高速扫描、亚微米定位、AI 缺陷分类与暗场高信噪比成像。</p>
+    </div>
+    <div class="feat">
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><circle cx="26" cy="26" r="18" fill="none" stroke="#38bdf8" stroke-width="2"/><circle cx="26" cy="26" r="12" fill="none" stroke="#22d3ee" stroke-width="1.4" opacity=".7"/><circle cx="26" cy="26" r="6" fill="#0e7490" opacity=".5"/><path d="M26 8v5M26 39v5M8 26h5M39 26h5" stroke="#67e8f9" stroke-width="1.5"/><text x="26" y="49" text-anchor="middle" fill="#7d97b8" font-size="7">4-12"</text></svg>
+        <h4>全尺寸兼容</h4><p>支持 4~12 英寸晶圆全尺寸检测，覆盖多种工艺阶段。</p>
+      </div>
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><circle cx="26" cy="26" r="18" fill="none" stroke="#38bdf8" stroke-width="1.5"/><circle cx="26" cy="26" r="12" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity=".6"/><circle cx="26" cy="26" r="6" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity=".4"/><circle cx="26" cy="26" r="2.6" fill="#fbbf24"/><path d="M26 26 L44 12" stroke="#fbbf24" stroke-width="1.4" stroke-dasharray="3 2"/></svg>
+        <h4>80nm 级灵敏度</h4><p>检测灵敏度 ≤80nm，光学分辨率 ≤50nm，捕捉纳米级微小缺陷。</p>
+      </div>
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><path d="M8 34h36" stroke="#334155" stroke-width="2"/><g fill="#22d3ee"><rect x="10" y="24" width="7" height="10" rx="1"/><rect x="20" y="18" width="7" height="16" rx="1"/><rect x="30" y="12" width="7" height="22" rx="1"/></g><path d="M10 12 L38 8" stroke="#fbbf24" stroke-width="1.6" fill="none"/><path d="M34 5 l5 3 l-6 3" stroke="#fbbf24" stroke-width="1.6" fill="none"/></svg>
+        <h4>高速扫描</h4><p>检测速度 ≥30 片/小时，扫描速度 ≥50mm/s 可调，适配产线节拍。</p>
+      </div>
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><circle cx="26" cy="26" r="14" fill="none" stroke="#818cf8" stroke-width="1.6"/><path d="M26 4v12M26 36v12M4 26h12M36 26h12" stroke="#818cf8" stroke-width="1.6"/><circle cx="26" cy="26" r="4" fill="#a5b4fc"/><circle cx="26" cy="26" r="1.5" fill="#0b1220"/></svg>
+        <h4>亚微米定位</h4><p>位置重复性误差 ≤0.5μm，缺陷坐标输出精准可追溯。</p>
+      </div>
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><g fill="#38bdf8"><circle cx="26" cy="10" r="3"/><circle cx="12" cy="30" r="3"/><circle cx="40" cy="30" r="3"/><circle cx="26" cy="42" r="3"/></g><g stroke="#22d3ee" stroke-width="1.4"><path d="M26 10 L12 30M26 10 L40 30M12 30 L26 42M40 30 L26 42M12 30 L40 30"/></g><circle cx="26" cy="26" r="4" fill="#0e7490" stroke="#67e8f9"/></svg>
+        <h4>AI 缺陷分类</h4><p>深度学习算法自动分类，缺陷分类准确率 ≥97%，支持配方训练。</p>
+      </div>
+      <div class="fcard reveal">
+        <svg class="ico" viewBox="0 0 52 52"><rect x="6" y="14" width="40" height="24" rx="3" fill="#0c1a2b" stroke="#2f5e86"/><path d="M10 30 l6 -8 l6 5 l6 -11 l6 9 l6 -5" fill="none" stroke="#22d3ee" stroke-width="1.6"/><circle cx="28" cy="16" r="2.6" fill="#fbbf24"/></svg>
+        <h4>暗场高信噪比</h4><p>暗背景抑制干扰，对颗粒与划痕等散射型缺陷灵敏度显著提升。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAFER / DEFECT COVERAGE -->
+  <section id="wafer">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Defect Coverage</div>
+      <h2>缺陷覆盖能力</h2>
+      <p>可检测表面颗粒、划痕、凹坑、凸起等典型缺陷，覆盖裸晶圆与有图形晶圆的表观异常监控。</p>
+    </div>
+    <div class="wafer-layout">
+      <div class="panel reveal">
+        <svg viewBox="0 0 380 380" width="100%" role="img" aria-label="晶圆缺陷分布示意图">
+          <defs>
+            <radialGradient id="waf" cx="38%" cy="32%" r="72%"><stop offset="0" stop-color="#164e63"/><stop offset="0.5" stop-color="#0e7490"/><stop offset="1" stop-color="#083344"/></radialGradient>
+            <clipPath id="wClip"><circle cx="190" cy="190" r="150"/></clipPath>
+          </defs>
+          <circle cx="190" cy="190" r="150" fill="url(#waf)" stroke="#67e8f9" stroke-width="1.5"/>
+          <g clip-path="url(#wClip)" stroke="#a5f3fc" stroke-width=".6" opacity=".28">
+            <path d="M40 190h300M190 40v300M85 85l210 210M295 85L85 295"/>
+            <path d="M130 40v300M250 40v300M40 130h300M40 250h300"/>
+          </g>
+          <!-- notch -->
+          <path d="M190 340 l9 -12 l-18 0 z" fill="#070b14"/>
+          <!-- defects -->
+          <g>
+            <circle cx="120" cy="130" r="4" fill="#fbbf24"/><circle cx="250" cy="120" r="3.4" fill="#fbbf24"/>
+            <circle cx="160" cy="250" r="3" fill="#fbbf24"/><circle cx="270" cy="220" r="4" fill="#fbbf24"/>
+            <path d="M96 210 l40 -10" stroke="#f87171" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M210 290 l34 -22" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="230" cy="170" r="6" fill="none" stroke="#a78bfa" stroke-width="2"/>
+            <circle cx="140" cy="200" r="5" fill="none" stroke="#a78bfa" stroke-width="2"/>
+          </g>
+          <!-- scan line -->
+          <path d="M40 170 L340 170" stroke="#67e8f9" stroke-width="1" stroke-dasharray="6 5" opacity=".5"/>
+          <text x="190" y="372" text-anchor="middle" fill="#54708f" font-size="10">概念示意 · 缺陷位置为示意标注</text>
+        </svg>
+      </div>
+      <div class="panel reveal">
+        <h3 style="font-size:17px;margin-bottom:6px">可检缺陷类型</h3>
+        <p style="font-size:13px;color:var(--sub)">暗场对散射型缺陷尤为敏感，覆盖离散异常与形貌异常。</p>
+        <div class="legend">
+          <div><i style="background:#fbbf24"></i>颗粒 / 掉落物</div>
+          <div><i style="background:#f87171"></i>划痕 / 裂纹</div>
+          <div><i style="background:#a78bfa"></i>凹坑 / 凸起</div>
+          <div><i style="background:#22d3ee"></i>崩边 / 沾污</div>
+        </div>
+        <div class="feat" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px">
+          <svg viewBox="0 0 40 40" class="ico"><g fill="#fbbf24"><circle cx="14" cy="14" r="3"/><circle cx="24" cy="18" r="2.4"/><circle cx="18" cy="25" r="2.6"/></g></svg>
+          <svg viewBox="0 0 40 40" class="ico"><path d="M8 30 L30 10" stroke="#f87171" stroke-width="3" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 40 40" class="ico"><circle cx="20" cy="20" r="10" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="#0c1a2b" stroke="#a78bfa" stroke-width="2"/></svg>
+          <svg viewBox="0 0 40 40" class="ico"><path d="M10 28 q10 -18 20 0 z" fill="#22d3ee" opacity=".8"/><path d="M14 28 h12" stroke="#0e7490" stroke-width="2"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM -->
+  <section id="system">
+    <div class="sec-h reveal">
+      <div class="eyebrow">System Architecture</div>
+      <h2>系统构成</h2>
+      <p>集光学检测、精密运动、自动上下料与智能算法于一体，形成从晶圆装载到缺陷分类与数据追溯的完整闭环。</p>
+    </div>
+    <div class="flow-wrap reveal">
+      <span class="flow-band">检测闭环 · 从装载到数据</span>
+      <svg viewBox="0 0 1080 150" width="100%" role="img" aria-label="系统构成流程图">
+        <defs>
+          <marker id="arrFlow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0 0 L8 3.5 L0 7 z" fill="#38bdf8"/></marker>
+          <linearGradient id="nodeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13233a"/><stop offset="1" stop-color="#0d1828"/></linearGradient>
+        </defs>
+        <!-- connectors -->
+        <g stroke="#38bdf8" stroke-width="1.6" marker-end="url(#arrFlow)" fill="none">
+          <path d="M168 52 L200 52"/><path d="M348 52 L380 52"/><path d="M528 52 L560 52"/>
+          <path d="M708 52 L740 52"/><path d="M888 52 L920 52"/>
+        </g>
+        <!-- nodes -->
+        <g font-size="11" fill="#e8eef8" text-anchor="middle">
+          <g><rect x="28" y="18" width="140" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><circle cx="98" cy="42" r="10" fill="#0e7490" stroke="#22d3ee"/><text x="98" y="76">EFEM 自动上下料</text></g>
+          <g><rect x="200" y="18" width="148" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><path d="M248 42 q22 -12 44 0 q-22 12 -44 0z" fill="#1c3a52" stroke="#22d3ee"/><text x="274" y="76">斜入射照明 · 光学头</text></g>
+          <g><rect x="380" y="18" width="148" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><path d="M432 42 q22 -12 44 0 q-22 12 -44 0z" fill="#1c3a52" stroke="#22d3ee"/><text x="454" y="76">高NA 散射光收集</text></g>
+          <g><rect x="560" y="18" width="148" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><rect x="614" y="32" width="40" height="20" rx="3" fill="#13344a" stroke="#22d3ee"/><text x="634" y="76">TDI / 高灵敏相机</text></g>
+          <g><rect x="740" y="18" width="148" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><circle cx="814" cy="42" r="11" fill="none" stroke="#818cf8" stroke-width="1.6"/><circle cx="814" cy="42" r="3" fill="#a5b4fc"/><text x="814" y="76">精密运动平台</text></g>
+          <g><rect x="920" y="18" width="132" height="68" rx="10" fill="url(#nodeG)" stroke="#2f5e86"/><path d="M970 50 l10 -16 l10 16 z" fill="#0e7490" stroke="#67e8f9"/><text x="986" y="76">AI 缺陷分类</text></g>
+        </g>
+        <!-- second row: data output -->
+        <path d="M986 86 L986 112 L160 112 L160 92" stroke="#22d3ee" stroke-width="1.4" stroke-dasharray="6 4" fill="none" marker-end="url(#arrFlow)"/>
+        <g><rect x="70" y="112" width="180" height="30" rx="8" fill="#0b1a2b" stroke="#2f5e86"/><text x="160" y="132" fill="#67e8f9" font-size="11" text-anchor="middle">数据追溯 · CSV / 数据库 · SECS/GEM</text></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS -->
+  <section id="apps">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Applications</div>
+      <h2>典型应用场景</h2>
+      <p>适用于无图案晶圆高速全片扫描、有图形晶圆表观颗粒监控、在线工艺质量控制与良率提升。</p>
+    </div>
+    <div class="apps">
+      <div class="app reveal">
+        <div class="ico"><svg viewBox="0 0 80 70" width="76"><circle cx="40" cy="35" r="24" fill="none" stroke="#22d3ee" stroke-width="2"/><path d="M16 22h48M16 35h48M16 48h48" stroke="#0e7490" stroke-width="1" opacity=".7"/><path d="M8 35h64" stroke="#fbbf24" stroke-width="1.6" stroke-dasharray="5 4"/></svg></div>
+        <h4>全片扫描</h4><p>裸硅 / 外延层高速全检</p>
+      </div>
+      <div class="app reveal">
+        <div class="ico"><svg viewBox="0 0 80 70" width="76"><circle cx="40" cy="35" r="24" fill="none" stroke="#22d3ee" stroke-width="2"/><g fill="#fbbf24"><circle cx="30" cy="28" r="2.4"/><circle cx="50" cy="40" r="2"/><circle cx="38" cy="46" r="2.2"/></g><path d="M40 11v48M16 35h48" stroke="#0e7490" stroke-width=".8" opacity=".6"/></svg></div>
+        <h4>颗粒监控</h4><p>图形晶圆表观颗粒检测</p>
+      </div>
+      <div class="app reveal">
+        <div class="ico"><svg viewBox="0 0 80 70" width="76"><rect x="10" y="28" width="60" height="18" rx="3" fill="#0c1a2b" stroke="#38bdf8"/><g fill="#22d3ee"><circle cx="24" cy="37" r="4"/><circle cx="40" cy="37" r="4"/><circle cx="56" cy="37" r="4"/></g><path d="M40 28 V14" stroke="#fbbf24" stroke-width="1.6"/><path d="M34 20 l6 -6 l6 6" stroke="#fbbf24" stroke-width="1.6" fill="none"/></svg></div>
+        <h4>在线质控</h4><p>产线工艺异常及时预警</p>
+      </div>
+      <div class="app reveal">
+        <div class="ico"><svg viewBox="0 0 80 70" width="76"><path d="M12 58h56" stroke="#334155" stroke-width="2"/><path d="M16 50 l14 -12 l12 6 l14 -20 l10 8" fill="none" stroke="#34d399" stroke-width="2.4"/><path d="M50 24 l8 -2 l-2 8" fill="#34d399"/></svg></div>
+        <h4>良率提升</h4><p>缺陷分析驱动工艺优化</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section id="specs">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Specifications</div>
+      <h2>技术参数</h2>
+      <p>以下参数依据《高精度暗场扫描式晶圆缺陷检测设备》团体标准口径列示。</p>
+    </div>
+    <div class="spec-wrap">
+      <div class="reveal">
+        <table>
+          <tbody>
+            <tr><th>支持晶圆尺寸</th><td>4 ~ 12 英寸全尺寸检测</td></tr>
+            <tr><th>检测灵敏度</th><td>≤ 80 nm</td></tr>
+            <tr><th>检测速度</th><td>≥ 30 片 / 小时</td></tr>
+            <tr><th>位置重复性误差</th><td>≤ 0.5 μm</td></tr>
+            <tr><th>缺陷分类准确率</th><td>≥ 97%</td></tr>
+            <tr><th>光学分辨率</th><td>≤ 50 nm</td></tr>
+            <tr><th>扫描范围</th><td>≥ 300 mm × 300 mm</td></tr>
+            <tr><th>扫描速度</th><td>≥ 50 mm / s（可调）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reveal">
+        <table>
+          <tbody>
+            <tr><th>可检缺陷</th><td>颗粒、划痕、凹坑、凸起等</td></tr>
+            <tr><th>数据存储与导出</th><td>支持 CSV / 数据库</td></tr>
+            <tr><th>电源</th><td>AC 220 V ± 10%，50 Hz</td></tr>
+            <tr><th>功率</th><td>≤ 4 kW</td></tr>
+            <tr><th>工作温度</th><td>20 ℃ ± 1 ℃</td></tr>
+            <tr><th>工作湿度</th><td>40% ~ 60% RH</td></tr>
+            <tr><th>洁净室环境</th><td>符合 GB/T 25915.1</td></tr>
+            <tr><th>电气安全</th><td>符合 GB 4793.1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-h reveal">
+      <div class="eyebrow">Notes & Disclaimer</div>
+      <h2>关于说明</h2>
+    </div>
+    <div class="note reveal">
+      <h4>请先了解以下几点</h4>
+      <ul>
+        <li><b>矢量绘制：</b>本页所有图形均由 HTML + SVG 矢量代码绘制，<span class="warn">非位图图片、非真实设备</span>，仅用于展示与版式参考。</li>
+        <li><b>参数口径：</b>技术参数依据《高精度暗场扫描式晶圆缺陷检测设备》团体标准列示，未混入其他厂商机型数值。</li>
+        <li><b>技术原理：</b>暗场成像机理与系统构成为行业通用技术事实，用于说明工作原理，非本工站独有认证指标。</li>
+        <li><b>矢量优势：</b>图形可无损缩放、清晰锐利，便于按需修改颜色、标注与结构。</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>高端暗场晶圆缺陷检测系统工站 · 矢量介绍页</span>
+    <span>HTML + SVG 绘制 · 参数依据团体标准口径 · 图形为概念示意，非真实产品</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})
+    },{threshold:.1});
+    els.forEach(function(el){io.observe(el)});
+  }else{els.forEach(function(el){el.classList.add('vis')})}
+})();
+</script>
+</body>
+</html>
