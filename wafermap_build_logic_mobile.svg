@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" width="100%" role="img" aria-label="WaferMap 构建过程手机简化版">
+<defs>
+<pattern id="mbg" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#c3dcee" stroke-width="0.6" opacity="0.45"/></pattern>
+<radialGradient id="mwg" cx="45%" cy="38%" r="70%"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#dcecf8"/></radialGradient>
+<marker id="marw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0284c7"/></marker>
+<clipPath id="ma1"><circle cx="150" cy="285" r="88"/></clipPath>
+<clipPath id="ma2"><circle cx="150" cy="555" r="78"/></clipPath>
+<clipPath id="ma3a"><circle cx="150" cy="805" r="52"/></clipPath>
+<clipPath id="ma3b"><circle cx="360" cy="805" r="52"/></clipPath>
+<clipPath id="ma3c"><circle cx="570" cy="805" r="52"/></clipPath>
+<style>
+.title{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#0f172a;font-size:38px;font-weight:800}
+.sub{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#475569;font-size:18px}
+.card{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#ffffff;stroke:#b9d4e8;stroke-width:1.4}
+.head{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#0284c7;font-size:22px;font-weight:700}
+.lab{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#475569;font-size:18px}
+.lab2{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#334155;font-size:16px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;fill:#0e7490;font-size:17px}
+.hi{fill:#7c3aed}.pink{fill:#db2777}.cyan{fill:#0284c7}
+.wafer{fill:url(#mwg);stroke:#0284c7;stroke-width:1.6}
+.die{fill:#d8ebfa;stroke:#7fb5d6;stroke-width:0.8}
+.die0{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.6}
+.flow{stroke:#0284c7;stroke-width:2.6;fill:none;marker-end:url(#marw)}
+.dash{stroke-dasharray:6 4}
+</style>
+</defs>
+<rect width="720" height="1280" fill="#f4f8fc"/>
+<rect width="720" height="1280" fill="url(#mbg)"/>
+<text x="40" y="70" class="title" font-size="38" text-anchor="start" >WaferMap 构建</text>
+<text x="40" y="104" class="sub" font-size="18" text-anchor="start" >从 Die 网格到缺陷落点 · 手机速览版</text>
+<text x="680" y="70" class="lab2" font-size="16" text-anchor="end" >移动版 · 9:16</text>
+<rect x="30" y="140" width="660" height="250" rx="18" class="card"/>
+<text x="55" y="180" class="head" font-size="22" text-anchor="start" >① Die 网格基础</text>
+<circle cx="150" cy="285" r="88" class="wafer"/>
+<path d="M141 197 L150 207 L159 197 Z" fill="#f4f8fc" stroke="#0284c7" stroke-width="1"/>
+<g clip-path="url(#ma1)"><rect x="82.0" y="232.0" width="24" height="18" rx="2" class="die0"/><rect x="110.0" y="232.0" width="24" height="18" rx="2" class="die"/><rect x="138.0" y="232.0" width="24" height="18" rx="2" class="die"/><rect x="166.0" y="232.0" width="24" height="18" rx="2" class="die"/><rect x="194.0" y="232.0" width="24" height="18" rx="2" class="die"/><rect x="82.0" y="254.0" width="24" height="18" rx="2" class="die"/><rect x="110.0" y="254.0" width="24" height="18" rx="2" class="die"/><rect x="138.0" y="254.0" width="24" height="18" rx="2" class="die"/><rect x="166.0" y="254.0" width="24" height="18" rx="2" class="die"/><rect x="194.0" y="254.0" width="24" height="18" rx="2" class="die"/><rect x="82.0" y="276.0" width="24" height="18" rx="2" class="die"/><rect x="110.0" y="276.0" width="24" height="18" rx="2" class="die"/><rect x="138.0" y="276.0" width="24" height="18" rx="2" class="die"/><rect x="166.0" y="276.0" width="24" height="18" rx="2" class="die"/><rect x="194.0" y="276.0" width="24" height="18" rx="2" class="die"/><rect x="82.0" y="298.0" width="24" height="18" rx="2" class="die"/><rect x="110.0" y="298.0" width="24" height="18" rx="2" class="die"/><rect x="138.0" y="298.0" width="24" height="18" rx="2" class="die"/><rect x="166.0" y="298.0" width="24" height="18" rx="2" class="die"/><rect x="194.0" y="298.0" width="24" height="18" rx="2" class="die"/><rect x="82.0" y="320.0" width="24" height="18" rx="2" class="die"/><rect x="110.0" y="320.0" width="24" height="18" rx="2" class="die"/><rect x="138.0" y="320.0" width="24" height="18" rx="2" class="die"/><rect x="166.0" y="320.0" width="24" height="18" rx="2" class="die"/><rect x="194.0" y="320.0" width="24" height="18" rx="2" class="die"/></g>
+<circle cx="82.0" cy="250.0" r="5" fill="#7c3aed"/>
+<path d="M82.0 250.0 L105 210" stroke="#7c3aed" stroke-width="1.2" fill="none"/>
+<text x="58" y="205" class="hi" font-size="15" text-anchor="start" >LLC</text>
+<text x="265" y="245" class="lab2" font-size="18" text-anchor="start" >DiePitchX / DiePitchY</text>
+<text x="265" y="285" class="lab2" font-size="18" text-anchor="start" >DieIndex(C,R)：列 C / 行 R</text>
+<text x="265" y="325" class="lab" font-size="18" text-anchor="start" >Die(0,0) 左下角 = LLC</text>
+<path d="M360 398 V424" class="flow"/>
+<rect x="30" y="430" width="660" height="210" rx="18" class="card"/>
+<text x="55" y="470" class="head" font-size="22" text-anchor="start" >② 两个基准点</text>
+<circle cx="150" cy="555" r="78" class="wafer"/>
+<path d="M141 477 L150 487 L159 477 Z" fill="#f4f8fc" stroke="#0284c7" stroke-width="1"/>
+<g clip-path="url(#ma2)"><rect x="94.0" y="511.5" width="20" height="15" rx="2" class="die"/><rect x="117.0" y="511.5" width="20" height="15" rx="2" class="die"/><rect x="140.0" y="511.5" width="20" height="15" rx="2" class="die"/><rect x="163.0" y="511.5" width="20" height="15" rx="2" class="die"/><rect x="186.0" y="511.5" width="20" height="15" rx="2" class="die"/><rect x="94.0" y="529.5" width="20" height="15" rx="2" class="die"/><rect x="117.0" y="529.5" width="20" height="15" rx="2" class="die"/><rect x="140.0" y="529.5" width="20" height="15" rx="2" class="die"/><rect x="163.0" y="529.5" width="20" height="15" rx="2" class="die"/><rect x="186.0" y="529.5" width="20" height="15" rx="2" class="die"/><rect x="94.0" y="547.5" width="20" height="15" rx="2" class="die"/><rect x="117.0" y="547.5" width="20" height="15" rx="2" class="die"/><rect x="140.0" y="547.5" width="20" height="15" rx="2" class="die"/><rect x="163.0" y="547.5" width="20" height="15" rx="2" class="die"/><rect x="186.0" y="547.5" width="20" height="15" rx="2" class="die"/><rect x="94.0" y="565.5" width="20" height="15" rx="2" class="die"/><rect x="117.0" y="565.5" width="20" height="15" rx="2" class="die"/><rect x="140.0" y="565.5" width="20" height="15" rx="2" class="die"/><rect x="163.0" y="565.5" width="20" height="15" rx="2" class="die"/><rect x="186.0" y="565.5" width="20" height="15" rx="2" class="die"/><rect x="94.0" y="583.5" width="20" height="15" rx="2" class="die"/><rect x="117.0" y="583.5" width="20" height="15" rx="2" class="die"/><rect x="140.0" y="583.5" width="20" height="15" rx="2" class="die"/><rect x="163.0" y="583.5" width="20" height="15" rx="2" class="die"/><rect x="186.0" y="583.5" width="20" height="15" rx="2" class="die"/></g>
+<circle cx="115" cy="520" r="6" fill="#7c3aed"/>
+<circle cx="150" cy="555" r="6" fill="#db2777"/>
+<path d="M115 520 L150 555" class="dash" stroke="#d97706" stroke-width="1.8" fill="none"/>
+<text x="265" y="525" class="hi" font-size="18" text-anchor="start" >DieOrigin (Ox,Oy)</text>
+<text x="265" y="565" class="pink" font-size="18" text-anchor="start" >SampleCenterLocation (Cx,Cy)</text>
+<text x="265" y="610" class="lab" font-size="18" text-anchor="start" >设计坐标 = 原始 − (Cx,Cy)</text>
+<path d="M360 648 V674" class="flow"/>
+<rect x="30" y="680" width="660" height="190" rx="18" class="card"/>
+<text x="55" y="718" class="head" font-size="22" text-anchor="start" >③ 三种相对关系</text>
+<circle cx="150" cy="805" r="52" class="wafer"/><path d="M141 753 L150 763 L159 753 Z" fill="#f4f8fc" stroke="#0284c7" stroke-width="1"/><g clip-path="url(#ma3a)"><rect x="109.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="126.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="143.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="160.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="177.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="109.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="126.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="143.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="160.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="177.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="109.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="126.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="143.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="160.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="177.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="109.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="126.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="143.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="160.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="177.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="109.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="126.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="143.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="160.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="177.0" y="827.5" width="14" height="11" rx="2" class="die"/></g><circle cx="150" cy="805" r="5" fill="#7c3aed"/><circle cx="150" cy="805" r="10" fill="none" stroke="#db2777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<circle cx="360" cy="805" r="52" class="wafer"/><path d="M351 753 L360 763 L369 753 Z" fill="#f4f8fc" stroke="#0284c7" stroke-width="1"/><g clip-path="url(#ma3b)"><rect x="319.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="336.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="353.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="370.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="387.0" y="771.5" width="14" height="11" rx="2" class="die"/><rect x="319.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="336.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="353.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="370.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="387.0" y="785.5" width="14" height="11" rx="2" class="die"/><rect x="319.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="336.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="353.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="370.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="387.0" y="799.5" width="14" height="11" rx="2" class="die"/><rect x="319.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="336.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="353.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="370.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="387.0" y="813.5" width="14" height="11" rx="2" class="die"/><rect x="319.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="336.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="353.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="370.0" y="827.5" width="14" height="11" rx="2" class="die"/><rect x="387.0" y="827.5" width="14" height="11" rx="2" class="die"/></g><circle cx="360" cy="805" r="5" fill="#7c3aed"/><circle cx="360" cy="805" r="10" fill="none" stroke="#db2777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<circle cx="570" cy="805" r="52" class="wafer"/><path d="M561 753 L570 763 L579 753 Z" fill="#f4f8fc" stroke="#0284c7" stroke-width="1"/><g clip-path="url(#ma3c)"><rect x="539.0" y="763.5" width="14" height="11" rx="2" class="die"/><rect x="556.0" y="763.5" width="14" height="11" rx="2" class="die"/><rect x="573.0" y="763.5" width="14" height="11" rx="2" class="die"/><rect x="590.0" y="763.5" width="14" height="11" rx="2" class="die"/><rect x="607.0" y="763.5" width="14" height="11" rx="2" class="die"/><rect x="539.0" y="777.5" width="14" height="11" rx="2" class="die"/><rect x="556.0" y="777.5" width="14" height="11" rx="2" class="die"/><rect x="573.0" y="777.5" width="14" height="11" rx="2" class="die"/><rect x="590.0" y="777.5" width="14" height="11" rx="2" class="die"/><rect x="607.0" y="777.5" width="14" height="11" rx="2" class="die"/><rect x="539.0" y="791.5" width="14" height="11" rx="2" class="die"/><rect x="556.0" y="791.5" width="14" height="11" rx="2" class="die"/><rect x="573.0" y="791.5" width="14" height="11" rx="2" class="die"/><rect x="590.0" y="791.5" width="14" height="11" rx="2" class="die"/><rect x="607.0" y="791.5" width="14" height="11" rx="2" class="die"/><rect x="539.0" y="805.5" width="14" height="11" rx="2" class="die"/><rect x="556.0" y="805.5" width="14" height="11" rx="2" class="die"/><rect x="573.0" y="805.5" width="14" height="11" rx="2" class="die"/><rect x="590.0" y="805.5" width="14" height="11" rx="2" class="die"/><rect x="607.0" y="805.5" width="14" height="11" rx="2" class="die"/><rect x="539.0" y="819.5" width="14" height="11" rx="2" class="die"/><rect x="556.0" y="819.5" width="14" height="11" rx="2" class="die"/><rect x="573.0" y="819.5" width="14" height="11" rx="2" class="die"/><rect x="590.0" y="819.5" width="14" height="11" rx="2" class="die"/><rect x="607.0" y="819.5" width="14" height="11" rx="2" class="die"/></g><circle cx="570" cy="805" r="5" fill="#db2777"/><circle cx="592" cy="787" r="5" fill="#7c3aed"/><path d="M570 805 L592 787" class="dash" stroke="#d97706" stroke-width="1.4" fill="none"/>
+<text x="150" y="850" class="lab2" font-size="16" text-anchor="middle" >同为 0,0</text>
+<text x="150" y="872" class="lab" font-size="15" text-anchor="middle" >两点重合</text>
+<text x="360" y="850" class="lab2" font-size="16" text-anchor="middle" >同为 10,10</text>
+<text x="360" y="872" class="lab" font-size="15" text-anchor="middle" >仍重合</text>
+<text x="570" y="850" class="lab2" font-size="16" text-anchor="middle" >10,10 / 0,0</text>
+<text x="570" y="872" class="lab" font-size="15" text-anchor="middle" >网格偏移</text>
+<path d="M360 878 V904" class="flow"/>
+<rect x="30" y="910" width="660" height="240" rx="18" class="card"/>
+<text x="55" y="948" class="head" font-size="22" text-anchor="start" >④ 缺陷落点 XREL / YREL</text>
+<rect x="60" y="985" width="150" height="115" rx="4" fill="#d9ecfb" stroke="#0891b2" stroke-width="1.6"/>
+<path d="M97.5 985 V1100" stroke="#a8cbe3" stroke-width="0.8"/>
+<path d="M60 1013.75 H210" stroke="#a8cbe3" stroke-width="0.8"/>
+<path d="M135.0 985 V1100" stroke="#a8cbe3" stroke-width="0.8"/>
+<path d="M60 1042.5 H210" stroke="#a8cbe3" stroke-width="0.8"/>
+<path d="M172.5 985 V1100" stroke="#a8cbe3" stroke-width="0.8"/>
+<path d="M60 1071.25 H210" stroke="#a8cbe3" stroke-width="0.8"/>
+<rect x="56" y="1096" width="8" height="8" fill="#7c3aed"/>
+<text x="48" y="1124" class="hi" font-size="15" text-anchor="start" >LLC</text>
+<circle cx="120" cy="1035" r="6" fill="#db2777"/>
+<path d="M60 1100 H120 V1035" class="dash" stroke="#d97706" stroke-width="1.8" fill="none"/>
+<text x="85" y="1092" class="pink" font-size="15" text-anchor="start" >XREL</text>
+<text x="130" y="1065" class="pink" font-size="15" text-anchor="start" >YREL</text>
+<text x="250" y="1010" class="mono" font-size="17" text-anchor="start" >DieX = i·PitchX + Ox − Cx</text>
+<text x="250" y="1042" class="mono" font-size="17" text-anchor="start" >DieY = j·PitchY + Oy − Cy</text>
+<text x="250" y="1074" class="mono" font-size="17" text-anchor="start" >P = Die_LLC + (XREL, YREL)</text>
+<text x="250" y="1110" class="pink" font-size="16" text-anchor="start" >XREL / YREL 从 LLC 起算</text>
+<text x="250" y="1138" class="lab2" font-size="15" text-anchor="start" >IMAGELIST → TIFF（图片关联）</text>
+<circle cx="360" cy="1215" r="38" fill="#ffffff" stroke="#0284c7" stroke-width="1.4"/>
+<path d="M360 1177 V1253 M322 1215 H398" stroke="#b9d4e8" stroke-width="1"/>
+<path d="M360 1177 L367 1192 L353 1192 Z" fill="#db2777"/>
+<text x="360" y="1170" class="pink" font-size="16" text-anchor="middle" >N</text>
+<text x="360" y="1270" class="lab2" font-size="16" text-anchor="middle" >S</text>
+<text x="310" y="1220" class="lab2" font-size="16" text-anchor="middle" >W</text>
+<text x="410" y="1220" class="lab2" font-size="16" text-anchor="middle" >E</text>
+<text x="430" y="1221" class="lab" font-size="18" text-anchor="start" >Notch ↑ 北</text>
+</svg>
