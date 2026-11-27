@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据分析工具 | 高端暗场晶圆缺陷检测系统工站</title>
+<meta name="description" content="暗场晶圆缺陷检测工站数据分析工具入口：缺陷分布图、稼动率节拍、检出率、缺陷密度与批次趋势，全部浏览器本地运行。">
+<style>
+:root{
+  --bg:#070b14;--bg2:#0b1220;--panel:#0f1828;--panel2:#121e33;
+  --line:rgba(120,160,220,.14);--line2:rgba(120,160,220,.28);
+  --txt:#e8eef8;--sub:#9aabc4;--muted:#6b7d99;
+  --acc:#38bdf8;--acc2:#22d3ee;--acc3:#818cf8;--gold:#fbbf24;
+  --ok:#34d399;--red:#f87171;--max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.3;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
+.bg-glow{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(90px);opacity:.2}
+.bg-glow.a{width:520px;height:520px;top:-160px;left:-120px;background:#1e40af}
+.bg-glow.b{width:460px;height:460px;top:280px;right:-160px;background:#0e7490}
+header,main,footer{position:relative;z-index:1}
+
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,20,.72);border-bottom:1px solid var(--line)}
+.nav{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700}
+.brand .mk{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc3));display:grid;place-items:center;box-shadow:0 0 18px rgba(56,189,248,.3)}
+.brand .mk svg{width:17px;height:17px}
+.brand b{font-size:15px}
+.brand small{display:block;font-size:10px;color:var(--muted);font-weight:500;letter-spacing:1.2px}
+.navlinks{display:flex;gap:22px;font-size:13px;color:var(--sub);align-items:center}
+.navlinks a:hover{color:var(--acc)}
+.navlinks .active{color:var(--acc2)}
+.navlinks .nav-cta{padding:7px 14px;border:1px solid var(--line2);border-radius:8px;color:var(--acc2)}
+@media(max-width:820px){.navlinks{display:none}}
+
+.hero{padding:56px 0 12px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--acc2);border:1px solid var(--line2);padding:7px 14px;border-radius:100px;background:rgba(56,189,248,.06)}
+.tag .dot{width:6px;height:6px;border-radius:50%;background:var(--acc2);box-shadow:0 0 10px var(--acc2)}
+.hero h1{font-size:clamp(30px,4.4vw,50px);margin:18px 0 12px;font-weight:800;letter-spacing:-1px}
+.hero h1 .grad{background:linear-gradient(100deg,var(--acc),var(--acc2) 45%,var(--acc3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--sub);font-size:15px;max-width:760px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.badge{font-size:12px;color:var(--acc2);border:1px dashed var(--line2);border-radius:100px;padding:6px 12px;background:rgba(34,211,238,.04)}
+.badge.ok{color:var(--ok);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.06)}
+
+section{padding:52px 0}
+.sec-h{margin-bottom:24px;max-width:800px}
+.eyebrow{font-size:12px;color:var(--acc);letter-spacing:2.5px;font-weight:600;text-transform:uppercase}
+.sec-h h2{font-size:clamp(23px,3vw,34px);margin:10px 0 8px;letter-spacing:-.5px}
+.sec-h p{color:var(--sub);font-size:14px}
+
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:20px;transition:.22s;cursor:pointer;position:relative;overflow:hidden}
+.tcard:hover{border-color:var(--line2);transform:translateY(-3px)}
+.tcard.on{border-color:var(--acc2);box-shadow:0 0 0 1px rgba(34,211,238,.18) inset}
+.tcard.flag{grid-column:span 2;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
+.tcard .ico{width:46px;height:46px;color:var(--acc2);margin-bottom:12px}
+.tcard h3{font-size:16px;margin-bottom:6px}
+.tcard p{font-size:13px;color:var(--sub)}
+.tmeta{font-size:11px;color:var(--muted);margin-top:12px;letter-spacing:.3px}
+.tcard .open{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--acc2);margin-top:14px}
+.tcard .flag-art{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;background:#08111e;padding:8px}
+@media(max-width:900px){.tool-grid{grid-template-columns:1fr 1fr}.tcard.flag{grid-column:span 2;grid-template-columns:1fr}}
+@media(max-width:640px){.tool-grid{grid-template-columns:1fr}.tcard.flag{grid-column:span 1}}
+
+.workbench{margin-top:22px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.wb-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wb-head h3{font-size:16px;display:flex;align-items:center;gap:10px}
+.wb-head h3 svg{width:20px;height:20px;color:var(--acc2)}
+.wb-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:0 22px;border-bottom:1px solid var(--line)}
+.wb-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-size:13px;padding:12px 4px;cursor:pointer;font-family:inherit}
+.wb-tab.on{color:var(--acc2);border-bottom-color:var(--acc2)}
+.panel{display:none;padding:22px}
+.panel.on{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+.box{background:#0a1322;border:1px solid var(--line);border-radius:12px;padding:18px}
+.box h4{font-size:14px;margin-bottom:12px;color:var(--txt)}
+label.f{display:block;font-size:12px;color:var(--sub);margin:10px 0 5px}
+input,select,textarea{width:100%;background:#08111e;border:1px solid var(--line2);border-radius:8px;color:var(--txt);padding:9px 11px;font-size:13px;font-family:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(56,189,248,.12)}
+textarea{resize:vertical;min-height:150px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:7px;border:none;border-radius:9px;padding:9px 15px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#04121c;margin-top:12px}
+.btn.gho{background:transparent;border:1px solid var(--line2);color:var(--sub)}
+.btn.gho:hover{color:var(--acc2);border-color:var(--acc2)}
+.btn svg{width:15px;height:15px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:860px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{background:rgba(56,189,248,.04);border:1px solid var(--line);border-radius:11px;padding:13px}
+.stat .k{font-size:11px;color:var(--muted)}
+.stat .v{font-size:21px;font-weight:800;margin-top:4px;letter-spacing:-.5px}
+.stat .v span{font-size:12px;color:var(--acc2);font-weight:600}
+.svg-stage{width:100%;height:auto;background:#07101c;border:1px solid var(--line);border-radius:12px}
+.legend-row{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:10px}
+.legend-row i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.hint{font-size:11px;color:var(--muted);margin-top:8px}
+.result-line{font-size:13px;color:var(--sub);margin-top:10px}
+.result-line b{color:var(--txt)}
+.warnline{color:var(--gold);font-size:12px;margin-top:8px}
+.export-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:12px;margin-top:20px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow a"></div>
+<div class="bg-glow b"></div>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <div class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="#04121c" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+      <div><b>暗场晶圆缺陷检测工站</b><small>DARK-FIELD WAFER INSPECTION</small></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html#principle">检测原理</a>
+      <a href="index.html#specs">技术参数</a>
+      <a href="tools.html" class="active">工具入口</a>
+      <a href="apply.html" class="nav-cta">申请试用</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag"><span class="dot"></span>OPEN BENCH · 本地分析工具</span>
+    <h1>把检测数据，变成<span class="grad">可判断的结论</span></h1>
+    <p>参考 Open Bench 的设计逻辑：工具全部在浏览器本地运行，无需注册、无需上传，数据不出本机。面向暗场设备的使用数据与缺陷结果，提供从图谱绘制到节拍核算的一组轻量工具。</p>
+    <div class="badges">
+      <span class="badge ok">本地计算 · 不上传</span>
+      <span class="badge ok">即开即用 · 无依赖</span>
+      <span class="badge">支持 CSV / 手工粘贴</span>
+      <span class="badge">结果可导出</span>
+    </div>
+  </div>
+
+  <section id="bench">
+    <div class="sec-h">
+      <div class="eyebrow">Tool Bench</div>
+      <h2>工具台</h2>
+      <p>点击卡片切换到对应工具。旗舰工具为晶圆缺陷分布图，其余为设备使用数据快速核算。</p>
+    </div>
+    <div class="tool-grid" id="toolGrid"></div>
+  </section>
+
+  <section id="workbench" style="padding-top:0">
+    <div class="workbench">
+      <div class="wb-head">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          <span>分析工作台</span>
+        </h3>
+        <span class="hint">所有计算仅在本页完成</span>
+      </div>
+      <div class="wb-tabs" id="wbTabs"></div>
+
+      <!-- MAP -->
+      <div class="panel on" data-panel="map">
+        <div class="grid2">
+          <div class="box">
+            <h4>缺陷坐标输入</h4>
+            <label class="f" for="waferSize">晶圆尺寸</label>
+            <select id="waferSize">
+              <option value="100">4 英寸 / 100 mm</option>
+              <option value="150">6 英寸 / 150 mm</option>
+              <option value="200">8 英寸 / 200 mm</option>
+              <option value="300" selected>12 英寸 / 300 mm</option>
+            </select>
+            <label class="f" for="edgeEx">边缘排除区 (mm)</label>
+            <input id="edgeEx" type="number" value="3" min="0" max="30" step="0.5">
+            <label class="f" for="defectText">缺陷数据（每行：x,y,类型；类型可省略）</label>
+            <textarea id="defectText" spellcheck="false">-120,18,particle
+-108,22,particle
+-96,26,scratch
+-84,30,scratch
+-72,34,particle
+120,-18,particle
+108,-22,particle
+96,-26,scratch
+84,-30,particle
+10,110,edge_ring
+14,108,edge_ring
+18,106,edge_ring
+22,104,edge_ring
+26,102,edge_ring
+0,0,particle
+6,4,particle
+-6,-4,particle</textarea>
+            <button class="btn" id="runMap">绘制分布图
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn gho" id="loadSample">载入示例</button>
+            <div class="warnline" id="mapWarn"></div>
+          </div>
+          <div class="box">
+            <h4>晶圆缺陷分布</h4>
+            <div id="mapSvg"></div>
+            <div class="legend-row">
+              <span><i style="background:#38bdf8"></i>颗粒</span>
+              <span><i style="background:#fbbf24"></i>划痕</span>
+              <span><i style="background:#f87171"></i>边缘环</span>
+              <span><i style="background:#a78bfa"></i>凸起</span>
+              <span><i style="background:#34d399"></i>其他</span>
+            </div>
+            <div class="hint">坐标为相对晶圆中心的 mm 值；超出有效半径的点会被忽略。</div>
+          </div>
+        </div>
+        <div class="stat-grid" id="mapStats"></div>
+        <div class="export-row">
+          <button class="btn gho" id="exportCsv">导出缺陷 CSV</button>
+          <button class="btn gho" id="exportJson">导出会话 JSON</button>
+        </div>
+      </div>
+
+      <!-- OEE -->
+      <div class="panel" data-panel="oee">
+        <div class="grid2">
+          <div class="box">
+            <h4>设备使用数据</h4>
+            <label class="f" for="planH">计划开机时长 (h)</label><input id="planH" type="number" value="10" min="0" step="0.5">
+            <label class="f" for="runH">实际运行/检测时长 (h)</label><input id="runH" type="number" value="7.5" min="0" step="0.5">
+            <label class="f" for="wafers">产出晶圆数 (片)</label><input id="wafers" type="number" value="210" min="0" step="1">
+            <label class="f" for="rework">因缺陷复检/返工片数</label><input id="rework" type="number" value="12" min="0" step="1">
+            <label class="f" for="targetRate">目标节拍 (片/h)</label><input id="targetRate" type="number" value="30" min="0" step="1">
+            <button class="btn" id="runOee">计算稼动与节拍</button>
+          </div>
+          <div class="box">
+            <h4>核算结果</h4>
+            <div id="oeeResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPTURE -->
+      <div class="panel" data-panel="capture">
+        <div class="grid2">
+          <div class="box">
+            <h4>检出结果核对</h4>
+            <label class="f" for="tp">真阳性 TP（已检出且为真实缺陷）</label><input id="tp" type="number" value="186" min="0">
+            <label class="f" for="fn">假阴性 FN（漏检）</label><input id="fn" type="number" value="14" min="0">
+            <label class="f" for="fp">假阳性 FP（误报）</label><input id="fp" type="number" value="24" min="0">
+            <label class="f" for="tn">真阴性 TN（正确判无缺陷）</label><input id="tn" type="number" value="776" min="0">
+            <button class="btn" id="runCapture">计算检出指标</button>
+          </div>
+          <div class="box">
+            <h4>检出指标</h4>
+            <div id="captureResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DENSITY -->
+      <div class="panel" data-panel="density">
+        <div class="grid2">
+          <div class="box">
+            <h4>缺陷密度计算</h4>
+            <label class="f" for="dia">晶圆直径 (mm)</label><input id="dia" type="number" value="300" min="1">
+            <label class="f" for="cnt">缺陷计数</label><input id="cnt" type="number" value="58" min="0">
+            <label class="f" for="ex">边缘排除 (mm)</label><input id="ex" type="number" value="3" min="0">
+            <button class="btn" id="runDensity">计算密度</button>
+          </div>
+          <div class="box">
+            <h4>密度结果</h4>
+            <div id="densityResult"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TREND -->
+      <div class="panel" data-panel="trend">
+        <div class="grid2">
+          <div class="box">
+            <h4>批次缺陷趋势</h4>
+            <label class="f" for="trendText">每行：晶圆号,缺陷数</label>
+            <textarea id="trendText" spellcheck="false">01,42
+02,38
+03,51
+04,47
+05,66
+06,58
+07,73
+08,61
+09,55
+10,49</textarea>
+            <button class="btn" id="runTrend">绘制趋势</button>
+          </div>
+          <div class="box">
+            <h4>批次趋势图</h4>
+            <div id="trendSvg"></div>
+            <div id="trendStats"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPORT -->
+      <div class="panel" data-panel="export">
+        <div class="box">
+          <h4>会话数据导出</h4>
+          <p class="result-line">导出内容包含当前缺陷坐标、类型、图形参数与最近一次核算指标，全部由本机生成。</p>
+          <div class="export-row">
+            <button class="btn" id="exportAllCsv">导出全部 CSV</button>
+            <button class="btn gho" id="exportAllJson">导出全部 JSON</button>
+          </div>
+          <div class="hint" style="margin-top:14px">文件通过浏览器本地下载，不经过任何服务器。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>高端暗场晶圆缺陷检测系统工站 · 数据分析工具入口</span>
+    <span>工具为工程估算与可视化辅助，不替代设备计量、校准证书或正式质量报表</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var state = { defects: [], mapStats: {}, oee: {}, capture: {}, density: {}, trend: [] };
+  var typeColor = { particle:"#38bdf8", scratch:"#fbbf24", edge_ring:"#f87171", bump:"#a78bfa", pit:"#fb7185" };
+  var typeName = { particle:"颗粒", scratch:"划痕", edge_ring:"边缘环", bump:"凸起", pit:"凹坑" };
+
+  var tools = [
+    { id:"map", flag:true, title:"晶圆缺陷分布图", desc:"把坐标数据画成晶圆图，自动统计中心区、边缘环与主要缺陷类型。", meta:"FLAGSHIP · CSV / 粘贴 · 本地 SVG", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="16" cy="9" r="1" fill="currentColor"/></svg>' },
+    { id:"oee", title:"稼动率与节拍", desc:"按计划时长、运行时长、产出与目标节拍核算设备效率。", meta:"OEE · 产能 · 损失时长", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13l4-4M9 2h6M12 5v2"/></svg>' },
+    { id:"capture", title:"检出率与误报率", desc:"输入 TP / FN / FP / TN，计算召回率、精确率与 F1。", meta:"召回 · 精确 · F1", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l5 5L20 6"/><circle cx="12" cy="12" r="10"/></svg>' },
+    { id:"density", title:"缺陷密度", desc:"按晶圆尺寸与边缘排除区计算单位面积缺陷数。", meta:"defects/cm² · 面积修正", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>' },
+    { id:"trend", title:"批次缺陷趋势", desc:"按晶圆号绘制缺陷数折线，快速识别异常批次。", meta:"趋势 · 均值 · 极值", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18h18M4 15l5-5 4 3 7-8"/><circle cx="20" cy="5" r="1.5" fill="currentColor"/></svg>' },
+    { id:"export", title:"数据导出", desc:"将当前会话的缺陷与指标导出为 CSV / JSON。", meta:"CSV · JSON · 本地下载", icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4M4 17v3h16v-3"/></svg>' }
+  ];
+
+  var grid = document.getElementById("toolGrid");
+  var tabs = document.getElementById("wbTabs");
+
+  tools.forEach(function(t){
+    var card = document.createElement("div");
+    card.className = "tcard" + (t.flag ? " flag" : "");
+    card.dataset.tool = t.id;
+    var art = t.flag ? '<div class="flag-art"><svg viewBox="0 0 300 150" width="100%" height="100%"><circle cx="150" cy="75" r="62" fill="#08111e" stroke="#2f5e86"/><circle cx="150" cy="75" r="28" fill="none" stroke="#1e3a56" stroke-dasharray="3 3"/><g fill="#38bdf8"><circle cx="118" cy="60" r="2.4"/><circle cx="106" cy="52" r="2"/><circle cx="130" cy="83" r="2.2"/></g><g fill="#fbbf24"><circle cx="184" cy="62" r="2.4"/><circle cx="192" cy="70" r="2.2"/></g><g fill="#f87171"><circle cx="150" cy="18" r="2.4"/><circle cx="158" cy="20" r="2"/><circle cx="166" cy="25" r="2.2"/></g><path d="M150 13v124M88 75h124" stroke="#18304a" stroke-width="1"/></svg></div>' : "";
+    card.innerHTML = '<div>' + t.icon + '<h3>' + t.title + '</h3><p>' + t.desc + '</p><div class="tmeta">' + t.meta + '</div><span class="open">打开工具 →</span></div>' + art;
+    card.addEventListener("click", function(){ activate(t.id, true); });
+    grid.appendChild(card);
+
+    var tab = document.createElement("button");
+    tab.className = "wb-tab" + (t.id === "map" ? " on" : "");
+    tab.dataset.tab = t.id;
+    tab.textContent = t.title;
+    tab.addEventListener("click", function(){ activate(t.id, false); });
+    tabs.appendChild(tab);
+  });
+
+  function activate(id, scroll){
+    document.querySelectorAll(".tcard").forEach(function(el){ el.classList.toggle("on", el.dataset.tool === id); });
+    document.querySelectorAll(".wb-tab").forEach(function(el){ el.classList.toggle("on", el.dataset.tab === id); });
+    document.querySelectorAll(".panel").forEach(function(el){ el.classList.toggle("on", el.dataset.panel === id); });
+    if(scroll){
+      var wb = document.getElementById("workbench");
+      if(wb && wb.scrollIntoView) wb.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  }
+
+  function num(id){ return parseFloat(document.getElementById(id).value) || 0; }
+  function safeDiv(a,b){ return b ? a / b : 0; }
+  function fmt(n,d){ return Number(n).toFixed(d === undefined ? 2 : d); }
+
+  function parseDefects(text){
+    var out = [];
+    var lines = String(text || "").split(/\r?\n/);
+    lines.forEach(function(line,i){
+      var s = line.trim();
+      if(!s) return;
+      if(i === 0 && /x/i.test(s) && /y/i.test(s) && !/^-?\d/.test(s)) return;
+      var p = s.split(/[,\t;]/).map(function(v){ return v.trim(); });
+      var x = parseFloat(p[0]);
+      var y = parseFloat(p[1]);
+      if(isNaN(x) || isNaN(y)) return;
+      var type = (p[2] || "particle").toLowerCase();
+      if(!typeColor[type]) type = "other";
+      out.push({ x:x, y:y, type:type });
+    });
+    return out;
+  }
+
+  function renderMap(){
+    var d = num("waferSize") / 2;
+    var ex = num("edgeEx");
+    var exr = Math.max(0, d - ex);
+    var defects = parseDefects(document.getElementById("defectText").value);
+    var kept = defects.filter(function(p){ return Math.hypot(p.x,p.y) <= d + 1e-6; });
+    var inZone = kept.filter(function(p){ return Math.hypot(p.x,p.y) <= exr + 1e-6; });
+    var scale = 150 / d;
+    var cx = 180, cy = 180;
+    var dots = kept.map(function(p){
+      var px = cx + p.x * scale;
+      var py = cy - p.y * scale;
+      var c = typeColor[p.type] || "#34d399";
+      var edge = Math.hypot(p.x,p.y) > exr;
+      return '<circle cx="' + fmt(px,1) + '" cy="' + fmt(py,1) + '" r="' + (edge ? 3.2 : 2.8) + '" fill="' + c + '" opacity="' + (edge ? 1 : .9) + '"/>';
+    }).join("");
+
+    var svg = '<svg class="svg-stage" viewBox="0 0 360 360" role="img" aria-label="晶圆缺陷分布矢量图">' +
+      '<defs><radialGradient id="wg"><stop offset="0" stop-color="#10233a"/><stop offset="1" stop-color="#08111e"/></radialGradient></defs>' +
+      '<circle cx="180" cy="180" r="156" fill="#06101c" stroke="#1c3550"/>' +
+      '<circle cx="180" cy="180" r="150" fill="url(#wg)" stroke="#38bdf8" stroke-width="1.2"/>' +
+      '<circle cx="180" cy="180" r="' + fmt(exr * scale,1) + '" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5 4" opacity=".8"/>' +
+      '<path d="M180 30v300M30 180h300" stroke="#17304a" stroke-width="1"/>' +
+      '<circle cx="180" cy="180" r="3" fill="#22d3ee"/>' +
+      dots +
+      '<text x="180" y="20" text-anchor="middle" fill="#6b7d99" font-size="10">' + Math.round(d*2) + ' mm · edge exclusion ' + ex + ' mm</text>' +
+      '</svg>';
+    document.getElementById("mapSvg").innerHTML = svg;
+
+    var byType = {};
+    kept.forEach(function(p){ byType[p.type] = (byType[p.type] || 0) + 1; });
+    var topType = "—", topN = 0;
+    Object.keys(byType).forEach(function(k){ if(byType[k] > topN){ topN = byType[k]; topType = typeName[k] || k; } });
+    var meanR = kept.length ? kept.reduce(function(a,p){ return a + Math.hypot(p.x,p.y); },0) / kept.length : 0;
+
+    state.defects = kept;
+    state.mapStats = {
+      total: kept.length,
+      valid: inZone.length,
+      edge: kept.length - inZone.length,
+      meanR: meanR,
+      topType: topType
+    };
+
+    document.getElementById("mapStats").innerHTML =
+      stat("缺陷总数", kept.length, "个") +
+      stat("有效区缺陷", inZone.length, "个") +
+      stat("边缘排除区", kept.length - inZone.length, "个") +
+      stat("平均半径", fmt(meanR,1), "mm") +
+      stat("主要类型", topType, "") +
+      stat("忽略越界点", defects.length - kept.length, "个");
+
+    var warn = document.getElementById("mapWarn");
+    warn.textContent = defects.length === 0 ? "未解析到有效坐标，请检查输入格式。" : "";
+  }
+
+  function stat(k,v,u){
+    return '<div class="stat"><div class="k">' + k + '</div><div class="v">' + v + (u ? ' <span>' + u + '</span>' : '') + '</div></div>';
+  }
+
+  function renderResult(el, html){ document.getElementById(el).innerHTML = html; }
+
+  function runOee(){
+    var plan = num("planH"), run = num("runH"), waf = num("wafers"), rw = num("rework"), tgt = num("targetRate");
+    var availability = safeDiv(run, plan);
+    var performance = safeDiv(waf, run * tgt);
+    var quality = safeDiv(waf - rw, waf);
+    var oee = availability * performance * quality;
+    var actualRate = safeDiv(waf, plan);
+    var lost = Math.max(0, plan - run);
+    state.oee = { availability:availability, performance:performance, quality:quality, oee:oee, actualRate:actualRate, lost:lost };
+    renderResult("oeeResult",
+      stat("时间稼动率", fmt(availability*100,1), "%") +
+      stat("性能效率", fmt(performance*100,1), "%") +
+      stat("良品率", fmt(quality*100,1), "%") +
+      stat("综合 OEE", fmt(oee*100,1), "%") +
+      '<div class="result-line">实际产出节拍：<b>' + fmt(actualRate,1) + ' 片/h</b>，目标 <b>' + tgt + ' 片/h</b></div>' +
+      '<div class="result-line">未运行损失时长：<b>' + fmt(lost,1) + ' h</b></div>');
+  }
+
+  function runCapture(){
+    var tp = num("tp"), fn = num("fn"), fp = num("fp"), tn = num("tn");
+    var recall = safeDiv(tp, tp + fn);
+    var precision = safeDiv(tp, tp + fp);
+    var f1 = safeDiv(2 * precision * recall, precision + recall);
+    var fdr = safeDiv(fp, tp + fp);
+    var acc = safeDiv(tp + tn, tp + fn + fp + tn);
+    state.capture = { recall:recall, precision:precision, f1:f1, fdr:fdr, accuracy:acc };
+    renderResult("captureResult",
+      stat("召回率", fmt(recall*100,2), "%") +
+      stat("精确率", fmt(precision*100,2), "%") +
+      stat("F1 分数", fmt(f1,4), "") +
+      stat("误报率 FDR", fmt(fdr*100,2), "%") +
+      '<div class="result-line">总体准确率：<b>' + fmt(acc*100,2) + '%</b></div>');
+  }
+
+  function runDensity(){
+    var dia = num("dia"), cnt = num("cnt"), ex = num("ex");
+    var r = dia / 2, rr = Math.max(0, r - ex);
+    var area = Math.PI * rr * rr / 100;
+    var dens = safeDiv(cnt, area);
+    state.density = { dia:dia, count:cnt, area:area, density:dens };
+    renderResult("densityResult",
+      stat("有效半径", fmt(rr,1), "mm") +
+      stat("有效面积", fmt(area,2), "cm²") +
+      stat("缺陷密度", fmt(dens,3), "个/cm²") +
+      stat("缺陷计数", cnt, "个") +
+      '<div class="hint">面积按 π × (R − 边缘排除)² 计算，未扣除图形区遮挡。</div>');
+  }
+
+  function runTrend(){
+    var rows = document.getElementById("trendText").value.split(/\r?\n/).map(function(line){
+      var p = line.split(/[,\t;]/);
+      var wafer = p[0] ? p[0].trim() : "";
+      var v = parseFloat(p[1]);
+      return wafer && !isNaN(v) ? { wafer:wafer, v:v } : null;
+    }).filter(Boolean);
+    if(!rows.length){ document.getElementById("trendSvg").innerHTML = '<div class="warnline">未解析到有效数据。</div>'; return; }
+    state.trend = rows;
+    var vals = rows.map(function(r){ return r.v; });
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    var avg = vals.reduce(function(a,b){ return a+b; },0) / vals.length;
+    var W = 440, H = 190, pl = 38, pr = 14, pt = 18, pb = 30;
+    var span = (max - min) || 1;
+    var pts = rows.map(function(r,i){
+      var x = pl + i * (W - pl - pr) / Math.max(1, rows.length - 1);
+      var y = pt + (1 - (r.v - min) / span) * (H - pt - pb);
+      return [x,y];
+    });
+    var poly = pts.map(function(p){ return fmt(p[0],1) + "," + fmt(p[1],1); }).join(" ");
+    var circles = pts.map(function(p,i){
+      return '<circle cx="' + fmt(p[0],1) + '" cy="' + fmt(p[1],1) + '" r="3" fill="#22d3ee"><title>' + rows[i].wafer + ': ' + rows[i].v + '</title></circle>';
+    }).join("");
+    var gridLines = "";
+    for(var g=0; g<=3; g++){
+      var gy = pt + g * (H - pt - pb) / 3;
+      var gv = max - g * span / 3;
+      gridLines += '<line x1="' + pl + '" y1="' + fmt(gy,1) + '" x2="' + (W-pr) + '" y2="' + fmt(gy,1) + '" stroke="#18304a"/>' +
+                   '<text x="' + (pl-6) + '" y="' + fmt(gy+3,1) + '" text-anchor="end" fill="#6b7d99" font-size="9">' + fmt(gv,0) + '</text>';
+    }
+    var labels = rows.map(function(r,i){
+      if(rows.length > 12 && i % 2) return "";
+      var x = pts[i][0];
+      return '<text x="' + fmt(x,1) + '" y="' + (H-8) + '" text-anchor="middle" fill="#6b7d99" font-size="9">' + r.wafer + '</text>';
+    }).join("");
+    document.getElementById("trendSvg").innerHTML = '<svg class="svg-stage" viewBox="0 0 ' + W + ' ' + H + '">' + gridLines +
+      '<polyline points="' + poly + '" fill="none" stroke="#38bdf8" stroke-width="2"/>' + circles + labels + '</svg>';
+    document.getElementById("trendStats").innerHTML =
+      stat("均值", fmt(avg,1), "个") + stat("最小", min, "个") + stat("最大", max, "个") + stat("极差", max-min, "个");
+  }
+
+  function download(name, text, type){
+    var blob = new Blob([text], { type: type });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  }
+
+  function exportDefects(){
+    if(!state.defects.length){ alert("请先绘制缺陷分布图。"); return false; }
+    var lines = ["x_mm,y_mm,type"];
+    state.defects.forEach(function(p){ lines.push([p.x, p.y, p.type].join(",")); });
+    return lines.join("\n");
+  }
+
+  function sessionJson(){
+    return JSON.stringify({ generatedBy:"Dark-Field Wafer Inspection Tools", defects:state.defects, mapStats:state.mapStats, oee:state.oee, capture:state.capture, density:state.density, trend:state.trend }, null, 2);
+  }
+
+  document.getElementById("runMap").addEventListener("click", renderMap);
+  document.getElementById("loadSample").addEventListener("click", function(){
+    document.getElementById("defectText").value = "-120,18,particle\n-108,22,particle\n-96,26,scratch\n-84,30,scratch\n120,-18,particle\n10,110,edge_ring\n14,108,edge_ring\n18,106,edge_ring\n0,0,particle";
+    renderMap();
+  });
+  document.getElementById("runOee").addEventListener("click", runOee);
+  document.getElementById("runCapture").addEventListener("click", runCapture);
+  document.getElementById("runDensity").addEventListener("click", runDensity);
+  document.getElementById("runTrend").addEventListener("click", runTrend);
+
+  document.getElementById("exportCsv").addEventListener("click", function(){
+    var csv = exportDefects(); if(!csv) return;
+    download("darkfield_defects.csv", csv, "text/csv;charset=utf-8");
+  });
+  document.getElementById("exportJson").addEventListener("click", function(){
+    download("darkfield_session.json", sessionJson(), "application/json;charset=utf-8");
+  });
+  document.getElementById("exportAllCsv").addEventListener("click", function(){
+    var csv = exportDefects(); if(!csv) return;
+    var extra = ["", "# 计算指标", "key,value"];
+    Object.keys(state.oee).forEach(function(k){ extra.push("oee." + k + "," + state.oee[k]); });
+    Object.keys(state.capture).forEach(function(k){ extra.push("capture." + k + "," + state.capture[k]); });
+    Object.keys(state.density).forEach(function(k){ extra.push("density." + k + "," + state.density[k]); });
+    download("darkfield_all.csv", csv + "\n" + extra.join("\n"), "text/csv;charset=utf-8");
+  });
+  document.getElementById("exportAllJson").addEventListener("click", function(){
+    download("darkfield_all.json", sessionJson(), "application/json;charset=utf-8");
+  });
+
+  renderMap();
+})();
+</script>
+</body>
+</html>
