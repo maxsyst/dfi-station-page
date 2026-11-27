@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>移动端响应式预览 · 暗场晶圆检测工站</title>
+<style>
+  :root{
+    --bg:#f1f5f9; --panel:#ffffff; --text:#0f172a; --muted:#64748b;
+    --border:#dbe4ef; --accent:#0284c7; --phone-w:390px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 48px}
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  h1{font-size:23px;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:13px;max-width:680px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 30px rgba(15,23,42,.06)}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px;margin-bottom:18px}
+  .seg{display:flex;gap:6px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:4px;flex-wrap:wrap}
+  button,select{font:inherit;cursor:pointer;border:1px solid var(--border);background:#fff;color:var(--text);border-radius:9px;padding:7px 12px;font-size:13px}
+  button:hover{border-color:var(--accent);color:var(--accent)}
+  .seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .grow{flex:1}
+  a.link{color:var(--accent);text-decoration:none;font-size:13px}
+  a.link:hover{text-decoration:underline}
+  .stage{display:flex;justify-content:center;padding:26px 12px}
+  .phone{width:var(--phone-w);max-width:100%;height:min(844px,calc(100vh - 250px));min-height:600px;
+    border:10px solid #172033;border-radius:44px;background:#fff;position:relative;overflow:hidden;
+    box-shadow:0 24px 60px rgba(15,23,42,.22);transition:width .2s}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:122px;height:22px;
+    background:#172033;border-radius:0 0 16px 16px;z-index:3}
+  iframe{position:absolute;left:0;right:0;top:22px;bottom:0;width:100%;height:calc(100% - 22px);border:0;background:#fff}
+  .note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+  @media(max-width:640px){
+    .wrap{padding:18px 12px 36px}
+    .controls{padding:12px}
+    .phone{border-width:7px;border-radius:34px;height:min(760px,calc(100vh - 220px));min-height:540px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>移动端响应式预览</h1>
+      <div class="sub">在模拟手机视口中检查三个页面的布局：导航横向可滚动、卡片单列、参数表与表单自动压缩。</div>
+    </div>
+    <a class="link" id="openPage" href="index.html" target="_blank">在新标签打开 ↗</a>
+  </header>
+
+  <div class="card controls">
+    <div class="seg" id="pages">
+      <button type="button" data-page="index.html" class="on">首页</button>
+      <button type="button" data-page="tools.html">工具页</button>
+      <button type="button" data-page="apply.html">申请页</button>
+    </div>
+    <div class="grow"></div>
+    <label style="font-size:12px;color:var(--muted)">视口宽度
+      <select id="widthSel">
+        <option value="360">360 px</option>
+        <option value="390" selected>390 px</option>
+        <option value="430">430 px</option>
+      </select>
+    </label>
+    <button type="button" id="reloadBtn">刷新</button>
+  </div>
+
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="notch"></div>
+      <iframe id="frame" src="index.html" title="移动端页面预览"></iframe>
+    </div>
+  </div>
+  <div class="note">断点：≤820px 导航转为横向可滚动，≤480px 进一步压缩字号与间距。页面内容仅在本机预览。</div>
+</div>
+
+<script>
+(function(){
+  var frame = document.getElementById("frame");
+  var phone = document.getElementById("phone");
+  var openPage = document.getElementById("openPage");
+  var current = "index.html";
+  document.querySelectorAll("#pages button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      current = btn.dataset.page;
+      document.querySelectorAll("#pages button").forEach(function(b){ b.classList.toggle("on", b === btn); });
+      frame.src = current;
+      openPage.href = current;
+    });
+  });
+  document.getElementById("widthSel").addEventListener("change", function(){
+    phone.style.setProperty("--phone-w", this.value + "px");
+  });
+  document.getElementById("reloadBtn").addEventListener("click", function(){
+    frame.src = current;
+  });
+})();
+</script>
+</body>
+</html>
